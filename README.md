@@ -6,3 +6,5 @@ TO DO :
     - Finish API
     - Redis functions
     - Postgre functions
+    - Health route 
+    - Metrics route 

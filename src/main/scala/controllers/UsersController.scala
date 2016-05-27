@@ -55,6 +55,4 @@ class UsersController @Inject () (usersService: UsersService) extends Controller
     // TODO
   }
 
-
-
 }
