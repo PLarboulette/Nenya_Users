@@ -1,6 +1,8 @@
-package rabbitmq
+package amqp
 
 import com.rabbitmq.client.{AMQP, _}
+import play.api.libs.json.Json
+
 
 /**
   * Created by plarboul on 05/04/2016.
@@ -25,11 +27,17 @@ object Functions {
 
     val consumer : DefaultConsumer = new DefaultConsumer(channel) {
       override def handleDelivery(consumerTag: String, envelope: Envelope, properties: AMQP.BasicProperties, body: Array[Byte]){
-        println("received: " + fromBytes(body))
+        println("[LOG] [RECEIVED MESSAGE FROM AUTHENTICATION]  " + fromBytes(body))
         val replyToProps =  new AMQP.BasicProperties.Builder().correlationId(properties.getCorrelationId).build()
+        val incomingMessage = fromBytes(body)
+        val parsedMessage = Json.parse(incomingMessage)
+        println(parsedMessage.\("type").as[String])
 
-        // TO DO Replace value by the return of function
-        val valueToReturn = "Return"
+
+
+        val valueToReturn = fromBytes(body)
+        println("[LOG] [PUBLISHED MESSAGE TO AUTHENTICATION]  " + fromBytes(body))
+
         channel.basicPublish( "", properties.getReplyTo(), replyToProps, valueToReturn.getBytes())
       }
     }

@@ -1,4 +1,4 @@
-import rabbitmq.Functions
+import amqp.Functions
 import com.rabbitmq.client.{AMQP, _}
 
 
@@ -11,6 +11,6 @@ object Main extends App {
 
   val connection = Functions.connect("localhost")
   val channel : Channel = Functions.createChannel(connection)
-  Functions.receive(channel, "users", "direct", "create")
+  Functions.receive(channel, "users", "direct", "login")
 
 }
