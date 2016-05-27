@@ -9,7 +9,7 @@ import services.UsersService
 
 /**
   * Created by pierre on 27/05/16.
-
+  *
   */
 
 class UsersController @Inject () (usersService: UsersService) extends Controller {
@@ -33,4 +33,28 @@ class UsersController @Inject () (usersService: UsersService) extends Controller
     if (post.nonEmpty) Map("posts" -> post.get)
     else Map("Error" -> "ID not recognized")
   }
+
+  /**
+    * Create new user
+    */
+  post("/users") {request : Request =>
+  // TODO
+  }
+
+  /**
+    * Update an existing user
+    */
+  post("/users/:id") {request : Request =>
+    // TODO
+  }
+
+  /**
+    * Delete an existing user
+    */
+  delete("/users/:id") { request: Request =>
+    // TODO
+  }
+
+
+
 }

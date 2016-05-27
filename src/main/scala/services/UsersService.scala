@@ -21,4 +21,16 @@ class UsersService {
     val posts : mutable.Set[User] = getUsers.filter(user => user.id == userId)
     posts.headOption
   }
+
+  def createUser (): Unit = {
+    // TODO
+  }
+
+  def updateUser (id : String) : Unit = {
+    // TODO
+  }
+
+  def deleteUser (id : String) : Unit = {
+    // TODO
+  }
 }

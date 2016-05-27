@@ -1,4 +1,8 @@
 # Nenya_Users
-Micorservice pour la gestion des utilisateurs pour mon architecture microservices
 
-Comme back on GitHub ! 
+Microservice for user management.
+
+TO DO :
+    - Finish API
+    - Redis functions
+    - Postgre functions
