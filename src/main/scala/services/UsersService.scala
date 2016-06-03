@@ -1,14 +1,16 @@
 package services
 
-import scala.collection.mutable
+import database.mongo.MongoHelper
 
+import scala.collection.mutable
 import models.User
+import play.api.libs.json.JsValue
 
 
 /**
   * Created by pierre on 19/04/16.
   */
-class UsersService {
+object UsersService {
 
   def getUsers: mutable.Set[User] = {
 
@@ -22,8 +24,9 @@ class UsersService {
     posts.headOption
   }
 
-  def createUser (): Unit = {
-    // TODO
+  // Insert new user in database
+  def createUser (user : JsValue): JsValue = {
+    MongoHelper.createUser(user)
   }
 
   def updateUser (id : String) : Unit = {

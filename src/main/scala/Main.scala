@@ -12,5 +12,6 @@ object Main extends App {
   val connection = Functions.connect("localhost")
   val channel : Channel = Functions.createChannel(connection)
   Functions.receive(channel, "users", "direct", "login")
+  Functions.receive(channel, "users", "direct", "create_user")
 
 }

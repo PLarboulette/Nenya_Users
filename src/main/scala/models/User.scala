@@ -6,8 +6,8 @@ package models
  case class User(id: String,
                 firstName: String,
                 lastName: String,
-                rank : String,
-                author: String)
+                rank : String
+                )
   extends Ordered[User] {
   def compare(that: User): Int = that.lastName compare this.lastName
 }

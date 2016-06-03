@@ -12,13 +12,13 @@ import services.UsersService
   *
   */
 
-class UsersController @Inject () (usersService: UsersService) extends Controller {
+class UsersController  extends Controller {
 
   /**
     * Return all the users in database
     */
   get("/users") {request : Request =>
-    val users: Seq[User] = usersService.getUsers().toSeq.sorted
+    val users: Seq[User] = UsersService.getUsers.toSeq.sorted
     Map("posts" -> users, "count" -> users.size)
   }
 
@@ -28,7 +28,7 @@ class UsersController @Inject () (usersService: UsersService) extends Controller
   get("/users/:id") {request : Request =>
 
     val id : String = request.params.getOrElse("id","Fail")
-    val post : Option[User] =  usersService.getUserById(id)
+    val post : Option[User] =  UsersService.getUserById(id)
 
     if (post.nonEmpty) Map("posts" -> post.get)
     else Map("Error" -> "ID not recognized")

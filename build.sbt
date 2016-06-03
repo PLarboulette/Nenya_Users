@@ -43,7 +43,11 @@ libraryDependencies ++= Seq(
 
   "net.ruippeixotog" %% "scala-scraper" % "0.1.2",
   "net.debasishg" %% "redisclient" % "3.0",
-  "joda-time" % "joda-time" % "2.9.2"
+  "joda-time" % "joda-time" % "2.9.2",
+
+  "org.mongodb.scala" %% "mongo-scala-driver" % "1.0.1"
+
+
 
 )
 
