@@ -22,7 +22,6 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
   "com.twitter.inject" %% "inject-core" % versions.finatra,
-  "ch.qos.logback" % "logback-classic" % "1.0.13",
 
   "com.twitter.finatra" %% "finatra-http" % versions.finatra % "test",
   "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test",
@@ -41,13 +40,10 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.3" % "test",
   "org.specs2" %% "specs2" % "2.3.12" % "test",
 
-  "net.ruippeixotog" %% "scala-scraper" % "0.1.2",
   "net.debasishg" %% "redisclient" % "3.0",
   "joda-time" % "joda-time" % "2.9.2",
 
   "org.mongodb.scala" %% "mongo-scala-driver" % "1.0.1"
-
-
 
 )
 

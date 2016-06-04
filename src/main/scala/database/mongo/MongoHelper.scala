@@ -1,8 +1,9 @@
 package database.mongo
 
+import java.util.logging.Logger
+
 import org.mongodb.scala.bson.Document
 import org.mongodb.scala.{Completed, MongoClient, MongoCollection, MongoDatabase, Observer}
-import play.api.libs.json.JsValue
 import play.api.libs.json.{JsValue, Json}
 
 /**
@@ -10,10 +11,11 @@ import play.api.libs.json.{JsValue, Json}
   */
 object MongoHelper {
 
+  val logger : Logger = Logger.getLogger("MongoHelper Logger")
+
   val mongoClient: MongoClient = MongoClient("mongodb://localhost:27030")
   val database: MongoDatabase = mongoClient.getDatabase("users")
   val collection: MongoCollection[Document] = database.getCollection("users")
-
 
   // Insert new user in database
   // TODO Manage errors in parsing
@@ -25,12 +27,11 @@ object MongoHelper {
       "rank" -> "user")
 
     collection.insertOne(doc).subscribe(new Observer[Completed] {
-      override def onNext(result: Completed): Unit = println("Inserted user " + user)
-      override def onError(e: Throwable): Unit = println(e.getMessage);
-      override def onComplete(): Unit = println("Completed")
+      override def onNext(result: Completed): Unit = {}
+      override def onError(e: Throwable): Unit = logger.warning(e.getMessage)
+      override def onComplete(): Unit = logger.info("User inserted / Data "+doc.toBsonDocument.toString)
     })
 
     Json.parse(doc.toBsonDocument.toString)
   }
-
 }
