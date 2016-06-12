@@ -2,9 +2,9 @@ package database.mongo
 
 import java.util.logging.Logger
 
-import org.mongodb.scala.bson.Document
-import org.mongodb.scala.{Completed, MongoClient, MongoCollection, MongoDatabase, Observer}
 import play.api.libs.json.{JsValue, Json}
+import scala.collection.mutable
+import com.mongodb.casbah.Imports._
 
 /**
   * Created by pierre on 27/05/16.
@@ -13,25 +13,36 @@ object MongoHelper {
 
   val logger : Logger = Logger.getLogger("MongoHelper Logger")
 
-  val mongoClient: MongoClient = MongoClient("mongodb://localhost:27030")
-  val database: MongoDatabase = mongoClient.getDatabase("users")
-  val collection: MongoCollection[Document] = database.getCollection("users")
+  val mongoClient = MongoClient("localhost", 27030)
+  val db = mongoClient("users")
+  val coll = db("users")
 
-  // Insert new user in database
   // TODO Manage errors in parsing
+  /**
+    * Create new user
+    * @param user = the user to insert
+    * @return = a JSON with the data of the new user
+    */
   def createUser (user : JsValue) : JsValue = {
 
-    val doc: Document = Document(
+    val doc = MongoDBObject(
       "lastName" -> user.\("lastName").as[String],
       "firstName" -> user.\("firstName").as[String],
-      "rank" -> "user")
+      "rank" -> "user"
+    )
 
-    collection.insertOne(doc).subscribe(new Observer[Completed] {
-      override def onNext(result: Completed): Unit = {}
-      override def onError(e: Throwable): Unit = logger.warning(e.getMessage)
-      override def onComplete(): Unit = logger.info("User inserted / Data "+doc.toBsonDocument.toString)
-    })
+    coll.insert(doc)
+    Json.parse(doc.toString)
+  }
 
-    Json.parse(doc.toBsonDocument.toString)
+  def getUsers ( filters : JsValue) : JsValue = {
+    filters
+  }
+
+  def getUser (idUser : JsValue) : JsValue = {
+    /*val id = idUser.\("idUser").as[String]
+    collection.find(equal("$oid", id)).first().
+    idUser*/
+    idUser
   }
 }

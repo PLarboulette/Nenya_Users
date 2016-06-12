@@ -43,7 +43,6 @@ libraryDependencies ++= Seq(
   "net.debasishg" %% "redisclient" % "3.0",
   "joda-time" % "joda-time" % "2.9.2",
 
-  "org.mongodb.scala" %% "mongo-scala-driver" % "1.0.1"
-
+  "org.mongodb" %% "casbah" % "3.1.1"
 )
 

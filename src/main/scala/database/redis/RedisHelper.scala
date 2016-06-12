@@ -1,8 +1,19 @@
 package database.redis
 
+import models.User
+import play.api.libs.json.JsValue
+
+import scala.collection.mutable
+
 /**
-  * Created by pierre on 27/05/16.
+  * Created by Pierre on 27/05/16.
   */
-class RedisHelper {
+
+object RedisHelper {
+
+  def getUsers (filters : JsValue) : mutable.Set[User] = {
+    val result = mutable.Set[User]()
+    result
+  }
 
 }
