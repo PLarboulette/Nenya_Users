@@ -19,4 +19,8 @@ object Main extends App {
   Functions.receive(channel, "users", "direct", "delete_user")
   Functions.receive(channel, "users", "direct", "get_user")
   Functions.receive(channel, "users", "direct", "get_users")
+
+  // Get messages using for monitoring features
+  Functions.receive(channel, "users", "direct", "health_users")
+  Functions.receive(channel, "users", "direct", "metrics_users")
 }

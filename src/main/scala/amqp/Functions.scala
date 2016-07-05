@@ -4,6 +4,7 @@ import java.util.logging.Logger
 import com.rabbitmq.client.{AMQP, _}
 import play.api.libs.json.{JsValue, Json}
 import services.UsersService
+import monitoring.UserMonitoring
 
 /**
   * Created by Pierre on 05/04/2016.
@@ -57,12 +58,14 @@ object Functions {
 
         // Switch on the routing key and use the good function
         val valueToReturn : String = routingKey match {
-          case "login" => UsersService.login(parsedMessage).toString()
+          case "login" => UsersService.login(parsedMessage).getOrElse("Empty").toString
           case "create_user" => UsersService.createUser(parsedMessage).toString()
           case "update_user" => UsersService.updateUser(parsedMessage).toString
           case "delete_user" => UsersService.deleteUser(parsedMessage).toString()
-          case "get_user" => UsersService.getUser(parsedMessage).toString()
+          case "get_user" => UsersService.getUser(parsedMessage).getOrElse("Empty").toString
           case "get_users" => UsersService.getUsers(parsedMessage).toString()
+          case "health_users" => UserMonitoring.health()
+          case "metrics_users" => UserMonitoring.metrics()
           case _ => "You shouldn't pass ! "
         }
         channel.basicPublish( "", properties.getReplyTo, replyToProps, valueToReturn.getBytes())
